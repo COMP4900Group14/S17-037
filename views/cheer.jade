@@ -1,0 +1,22 @@
+extends layout
+
+block content
+	script.
+		console.log(JSON.parse('!{usernames}'));
+		$( function() { 
+			$( "#tags" ).autocomplete({
+			source: JSON.parse('!{usernames}')
+			});
+		});
+	.container
+		h1 Who would you like to thank for their hard work?
+	br
+	form(role='form', action="/cheer",method="post", style='max-width: 300px;')
+		.form-group
+			.ui-widget
+				label(for='tags') Tags:
+				input(id='tags' name='username')
+		.form-group
+			textarea(name="text" rows="4" cols="50")
+		button.btn.btn-default(type='submit') Submit
+	
