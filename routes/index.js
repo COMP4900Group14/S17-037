@@ -72,7 +72,7 @@ router.post('/cheer', function(req, res) {
 	   service: "Gmail",  // sets automatically host, port and connection security settings
 	   auth: {
 		   user: "nodemailercomp3900@gmail.com",
-		   pass: "test_mail"
+		   pass: "*****"
 	   }
 	});
 	
