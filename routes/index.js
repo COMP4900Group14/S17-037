@@ -151,19 +151,11 @@ router.get('/cheer', function(req, res) {
 
 router.post('/cheer', function(req, res) {
 	var transporter = nodemailer.createTransport("SMTP",{
-<<<<<<< HEAD
-		service: "Gmail",  // sets automatically host, port and connection security settings
-		auth: {
-			user: "nodemailercomp3900@gmail.com",
-			pass: "*****"
-		}
-=======
 	   service: "Gmail",  // sets automatically host, port and connection security settings
 	   auth: {
 		   user: "nodemailercomp3900@gmail.com",
 		   pass: "*****"
 	   }
->>>>>>> 34512738bc24a6f7b2631645c9657a4b8e524c7d
 	});
 	
 	var mailOptions = {
