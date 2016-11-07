@@ -1,0 +1,15 @@
+extends layout
+
+block content
+	if (user)
+		.container
+			h1 Thank you for your hard work!
+			ul
+				for compliment in compliments
+					li #{compliment}
+				else
+					li Don't worry you will recieve a compliment soon enough
+		br
+	if (!user)
+		h1 How did you get here?
+	

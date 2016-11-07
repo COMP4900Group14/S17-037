@@ -81,7 +81,7 @@ router.post('/register', function(req, res, next) {
 					service: "Gmail",  // sets automatically host, port and connection security settings
 					auth: {
 						user: "nodemailercomp3900@gmail.com",
-						pass: "*****"
+						pass: "notgithub_mail"
 					}
 				});
 				
@@ -154,7 +154,7 @@ router.post('/cheer', function(req, res) {
 	   service: "Gmail",  // sets automatically host, port and connection security settings
 	   auth: {
 		   user: "nodemailercomp3900@gmail.com",
-		   pass: "*****"
+		   pass: "notgithub_mail"
 	   }
 	});
 	
@@ -166,7 +166,7 @@ router.post('/cheer', function(req, res) {
 		html: '<b>'+ req.body.text +'</b>'
 	};
 
-	var compliment = new Compliment({sender: req.user, receiver: req.body.username, message: req.body.text});
+	var compliment = new Compliment({sender: req.user.username, receiver: req.body.username, message: req.body.text});
 	compliment.save(function(err) {
 	  if (err) throw err;
 
@@ -181,6 +181,28 @@ router.post('/cheer', function(req, res) {
 		}
 		console.log('Message sent: ' + info.response);
 	});
+});
+
+router.get('/compliments', function(req, res) {
+	if(req.user) {
+		Compliment.find({receiver: req.user.username}, function(err, compliments) {
+			if (err) throw err;
+			console.log(compliments)
+			var messages = [];
+			compliments.forEach(function(compliment) {
+				messages.push(compliment.message + " from: " + compliment.sender);
+			});
+			res.render('compliments', {compliments : messages, user : req.user});
+		});
+	} else {
+		res.render('compliments',  {});
+	}
+});
+
+router.get('/reset', function(req, res) {
+	Account.remove({}, function(error, result){});
+	Compliment.remove({}, function(error, result){});
+	res.redirect('/');
 });
 
 router.get('/ping', function(req, res){

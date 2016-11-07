@@ -5,21 +5,38 @@ block content
 		script.
 			console.log(JSON.parse('!{usernames}'));
 			$( function() { 
-				$( "#name" ).autocomplete({
+				$("#name").autocomplete({
 				source: JSON.parse('!{usernames}')
+				});
+				$("#text").blur(function() {
+					$("#textAreaOutputTemp").append($("#text").val());
+					$("#textAreaOutputTemp").profanityFilter({
+						externalSwears: './scripts/swearWords.json',
+						filter: false,
+						profaneText: function(data) {
+							var concat = "";
+							for(var i = 0; i < data.length - 1; i++) {
+								concat += data[i] + ", "
+							}
+							concat += "and " + data[data.length - 1]
+							alert("The swear word(s) " + concat + " Do you wish to continue? Please keep in mind this is a compliment only system.");
+						}
+					});
 				});
 			});
 		.container
 			h1 Who would you like to thank for their hard work?
-		br
-		form(role='form', action="/cheer",method="post", style='max-width: 300px;')
-			.form-group
-				.ui-widget
-					label(for='name') Tags:
-					input(id='name' name='username')
-			.form-group
-				textarea(name="text" rows="4" cols="50")
-			button.btn.btn-default(type='submit') Submit
+			h1(id='textAreaOutputTemp' style='display: none')
+			br
+			form(role='form', action="/cheer",method="post", style='max-width: 300px;')
+				.form-group
+					.ui-widget
+						label(for='name') Name:
+						input(id='name' name='username')
+					.form-group
+						textarea(id="text" name="text" rows="4" cols="50" spellcheck="true")
+					button.btn.btn-default(type='submit') Submit
+		script.
 	if (!active)
 		h1 Please activate your account to send a compliment
 	
