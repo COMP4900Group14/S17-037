@@ -9,17 +9,28 @@ block content
 				source: JSON.parse('!{usernames}')
 				});
 				$("#text").blur(function() {
+					$("#swearing").prop('checked', false);
+					$("#textAreaOutputTemp").empty();
 					$("#textAreaOutputTemp").append($("#text").val());
 					$("#textAreaOutputTemp").profanityFilter({
 						externalSwears: './scripts/swearWords.json',
 						filter: false,
 						profaneText: function(data) {
 							var concat = "";
-							for(var i = 0; i < data.length - 1; i++) {
-								concat += data[i] + ", "
+							console.log(data);
+							if(data.length <= 1) {
+								$("#swearing").prop('checked', false);
+								concat += data[0];
+							} else {
+								for(var i = 0; i < data.length - 1; i++) {
+									concat += data[i];
+									if(i + 1 != data.length) {
+										concat += ", "
+									}
+								}
+								concat += "and " + data[data.length - 1];
 							}
-							concat += "and " + data[data.length - 1]
-							alert("The swear word(s) " + concat + " Do you wish to continue? Please keep in mind this is a compliment only system.");
+							alert("The swear word(s) " + concat + ". Do you wish to continue? Please keep in mind this is a compliment only system.");
 						}
 					});
 				});
@@ -31,12 +42,11 @@ block content
 			form(role='form', action="/cheer",method="post", style='max-width: 300px;')
 				.form-group
 					.ui-widget
-						label(for='name') Name:
+						label(for='name' required) Name:
 						input(id='name' name='username')
-					.form-group
-						textarea(id="text" name="text" rows="4" cols="50" spellcheck="true")
+					textarea(id="text" name="text" rows="4" cols="50" spellcheck="true" required)
+					input(type="checkbox" id="swearing" name="swearing" style='display: none')
 					button.btn.btn-default(type='submit') Submit
 		script.
-	if (!active)
-		h1 Please activate your account to send a compliment
-	
+
+		

@@ -158,10 +158,13 @@ router.post('/cheer', function(req, res) {
 	   }
 	});
 	
+	console.log("swearing:");
+	console.log(req.body);
+	
 	var mailOptions = {
 		from: '"John Doe" <nodemailercomp3900@gmail.com>', // sender address
 		to: 'Gaston.E.Beaucage@gmail.com', // list of receivers
-		subject: 'Compliment from' + req.body.user, // Subject line
+		subject: 'Compliment from ' + req.body.username, // Subject line
 		text: 'Thank you!', // plaintext body
 		html: '<b>'+ req.body.text +'</b>'
 	};
