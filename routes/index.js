@@ -5,6 +5,7 @@ var Compliment = require('../models/compliment');
 var router = express.Router();
 var nodemailer = require("nodemailer");
 var randomstring = require("randomstring");
+var messageCount = 0;
 
 var os = require('os');
 var ifaces = os.networkInterfaces();
@@ -38,7 +39,11 @@ router.get('/', function (req, res) {
 		if (err) throw err;
 		var messages = [];
 		compliments.forEach(function(compliment) {
-			messages.push(compliment.message);
+			console.log("visible: " + compliment.visible + " swearing: " + compliment.swearing);
+			if(compliment.visible && !compliment.swearing) {
+				console.log("MESSAGES PUSHED")
+				messages.push(compliment.message);
+			}
 		});
 		res.render('index', { user : req.user, messages: messages});
 	});
@@ -67,7 +72,7 @@ router.get('/register', function(req, res) {
 
 router.post('/register', function(req, res, next) {
 	var actcode = randomstring.generate(32);
-	Account.register(new Account({ username : req.body.username, active: false, actcode: actcode}), req.body.password, function(err, account) {
+	Account.register(new Account({ username : req.body.username, active: false, actcode: actcode, manager: "null"}), req.body.password, function(err, account) {
 		if (err) {
 		  return res.render('register', { error : err.message });
 		}
@@ -164,12 +169,12 @@ router.post('/cheer', function(req, res) {
 	var mailOptions = {
 		from: '"John Doe" <nodemailercomp3900@gmail.com>', // sender address
 		to: 'Gaston.E.Beaucage@gmail.com', // list of receivers
-		subject: 'Compliment from ' + req.body.username, // Subject line
+		subject: 'Compliment from ' + req.user.username, // Subject line
 		text: 'Thank you!', // plaintext body
 		html: '<b>'+ req.body.text +'</b>'
 	};
 
-	var compliment = new Compliment({sender: req.user.username, receiver: req.body.username, message: req.body.text});
+	var compliment = new Compliment({sender: req.user.username, receiver: req.body.username, message: req.body.text, number: messageCount++, swearing: req.body.swearing, visible: true});
 	compliment.save(function(err) {
 	  if (err) throw err;
 
@@ -193,13 +198,122 @@ router.get('/compliments', function(req, res) {
 			console.log(compliments)
 			var messages = [];
 			compliments.forEach(function(compliment) {
-				messages.push(compliment.message + " from: " + compliment.sender);
+				messages.push(compliment);
 			});
 			res.render('compliments', {compliments : messages, user : req.user});
 		});
 	} else {
 		res.render('compliments',  {});
 	}
+});
+
+router.get('/manager', function(req, res) {
+	Account.find({}, function(err, users) {
+		if (err) throw err;
+		var usernames = [];
+		users.forEach(function(user) {
+			usernames.push(user.username);
+		});
+		if(req.user != undefined) {
+			var requests = [];
+			Account.find({}, function(err, accounts) {
+				if (err) throw err;
+				accounts.forEach(function(account) {
+					if(account.manager.localeCompare(req.user.username) == 0) {
+						requests.push(account.username);
+					}
+				});
+			});
+			Account.find({username: req.user.username}, function(err, user) {
+				if (err) throw err;
+				//console.log(req.user);
+				res.render('manager', {usernames : JSON.stringify(usernames), active : user[0].active, currentMan: (user[0].manager.localeCompare("null") == 0) ? "no current manager" : user[0].manager, currentReq: JSON.stringify(requests)});
+			});
+		} else {
+			res.render('manager', {usernames : JSON.stringify(usernames), active : false});
+		}
+	});
+});
+
+router.post('/managerReq', function(req, res) {
+	//console.log("user----------------------");
+	//console.log(req.body);
+	//console.log(req.user);
+	Account.find({username: req.user.username}, function(err, user) {
+		if(user[0] == undefined) {
+			console.log("user not found");
+			return;
+		}
+		if (err) throw err;
+		user[0].manager = req.body.managername;
+		user[0].save(function(err) {
+			if (err) throw err;
+			console.log(user[0]);
+			console.log('Account manager updated successfully!');
+		});
+	});
+	res.redirect('/manager');
+});
+
+router.post('/removeMan', function(req, res) {
+	//console.log("user----------------------");
+	//console.log(req.body);
+	//console.log(req.user);
+	Account.find({username: req.user.username}, function(err, user) {
+		if(user[0] == undefined) {
+			console.log("user not found");
+			return;
+		}
+		if (err) throw err;
+		user[0].manager = "null";
+		user[0].save(function(err) {
+			if (err) throw err;
+			console.log(user[0]);
+			console.log('Account manager updated successfully!');
+		});
+	});
+	res.redirect('/manager');
+});
+
+router.post('/managerRem', function(req, res) {
+	//console.log("user----------------------");
+	//console.log(req.body);
+	//console.log(req.user);
+	Account.find({username: req.body.nametoremove}, function(err, user) {
+		if(user[0] == undefined) {
+			console.log("user not found");
+			return;
+		}
+		if (err) throw err;
+		user[0].manager = "null";
+		user[0].save(function(err) {
+			if (err) throw err;
+			console.log(user[0]);
+			console.log('Account manager updated successfully!');
+		});
+	});
+	res.redirect('/manager');
+});
+
+router.post('/messageInvisible', function(req, res) {
+	console.log("-------------");
+	console.log(req.body.messageNumber);
+	Compliment.find({number: req.body.messageNumber}, function(err, message) {
+		if(message[0] == undefined) {
+			console.log("message not found");
+			return;
+		}
+		if (err) throw err;
+		message[0].visible = false;
+		console.log("-------------");
+		console.log(message[0].visible)
+		message[0].save(function(err) {
+			if (err) throw err;
+			console.log(message[0]);
+			console.log('message updated successfully!');
+		});
+	});
+	res.redirect('/');
 });
 
 router.get('/reset', function(req, res) {

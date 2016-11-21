@@ -6,10 +6,16 @@ block content
 			h1 Thank you for your hard work!
 			ul
 				for compliment in compliments
-					li #{compliment}
+					li #{compliment.message} from: #{compliment.sender}
+					form(role='form', action="/messageInvisible" ,method="post", style='max-width: 300px;')
+						.form-group
+							button.btn.btn-default(type='submit' name='messageNumber' value="#{compliment.number}") Make private
 				else
 					li Don't worry you will recieve a compliment soon enough
 		br
+		a(href="/") Back to the homepage
 	if (!user)
-		h1 How did you get here?
+		p You aren't logged in. Please log in
+		br
+		a(href="/") Back to the homepage
 	

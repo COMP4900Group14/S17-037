@@ -1,0 +1,41 @@
+extends layout
+
+block content
+	if (active)
+		script.
+			console.log(JSON.parse('!{usernames}'));
+			$( function() { 
+				$("#name").autocomplete({
+				source: JSON.parse('!{usernames}')
+				});
+			});
+		.container
+			h1 Please select your manager so he/she can be notified about any compliments you receive:
+			br
+			form(role='form', action="/managerReq" ,method="post", style='max-width: 300px;')
+				.form-group
+					.ui-widget
+						label(for='name' required) Name:
+						input(id='name' name='managername')
+					button.btn.btn-default(type='submit') Submit
+			h1 Current manager:
+			h2 #{currentMan}
+			form(role='form', action="/removeMan" ,method="post", style='max-width: 300px;')
+				.form-group
+					button.btn.btn-default(type='submit') Remove
+			h1  Who you manage:
+			br
+			.managerReq
+			script.
+				$(function() {
+					var requests =  JSON.parse('!{currentReq}');
+					for(var i = 0; i < requests.length; i++) {
+						$(".managerReq").append("<form role='form' action='/managerRem' method='post'><div class='form-group'>" + requests[i] + "<button class='btn btn-default' name='nametoremove' type='submit' value=" + requests[i] + ">Remove</button></div></form>");
+					}
+				});
+			a(href="/") Back to the homepage
+		script.
+	if(!active)
+		p Your account isn't activated. Please activated with the confirmation email.
+		br
+		a(href="/") Back to the homepage

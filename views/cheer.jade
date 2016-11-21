@@ -9,7 +9,7 @@ block content
 				source: JSON.parse('!{usernames}')
 				});
 				$("#text").blur(function() {
-					$("#swearing").prop('checked', false);
+					$("#swearing").val("false");
 					$("#textAreaOutputTemp").empty();
 					$("#textAreaOutputTemp").append($("#text").val());
 					$("#textAreaOutputTemp").profanityFilter({
@@ -17,11 +17,14 @@ block content
 						filter: false,
 						profaneText: function(data) {
 							var concat = "";
+							var concat2 = "";
 							console.log(data);
+							$("#swearing").val("true");
 							if(data.length <= 1) {
-								$("#swearing").prop('checked', false);
 								concat += data[0];
+								concat2 = " was detected";
 							} else {
+								concat2 = " were detected";
 								for(var i = 0; i < data.length - 1; i++) {
 									concat += data[i];
 									if(i + 1 != data.length) {
@@ -30,7 +33,7 @@ block content
 								}
 								concat += "and " + data[data.length - 1];
 							}
-							alert("The swear word(s) " + concat + ". Do you wish to continue? Please keep in mind this is a compliment only system.");
+							alert("The swear word(s) " + concat + concat2 + " detected . Do you wish to continue? Please keep in mind this is a compliment only system.");
 						}
 					});
 				});
@@ -45,8 +48,9 @@ block content
 						label(for='name' required) Name:
 						input(id='name' name='username')
 					textarea(id="text" name="text" rows="4" cols="50" spellcheck="true" required)
-					input(type="checkbox" id="swearing" name="swearing" style='display: none')
-					button.btn.btn-default(type='submit') Submit
+					button.btn.btn-default(type='submit' id="swearing" name="swearing" value="false") Submit
 		script.
-
-		
+	if(!active)
+		p Your account isn't activated. Please activated with the confirmation email.
+		br
+		a(href="/") Back to the homepage
