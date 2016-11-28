@@ -1,0 +1,117 @@
+﻿.textbox { 
+    margin:auto;
+    margin-bottom:20px;
+    height: 25px; 
+    width: 380px !important; 
+    background-color: transparent;  
+    border-style: solid;  
+    border-width: 0px 0px 1px 0px;  
+    border-color: darkred; 
+    outline: none;
+    display: block;
+    width: 270px;
+    padding: 4px 8px;
+    font-family: 'Droid Sans', Tahoma, Arial, Verdana sans-serif;
+    font-size: 14px;
+    color:#000;
+
+  } 
+
+    .styledForm{
+        display:block;
+        width:800px;
+        height:380px;
+        margin:auto;
+        margin-top:50px;
+        color:rgba(51, 121, 182, 1);
+        background: #fff;
+        border-radius: 5px;
+        font-family: 'Open Sans', sans-serif;
+    }
+
+    .styledForm h4{
+        background: #222d32;
+        color:#fff;
+        border-top-left-radius:5px;
+        border-top-right-radius: 5px;
+        padding-left:10px;
+        padding-top:10px;
+        padding-bottom: 10px;
+        text-align:left;    
+        font-family: 'Droid Sans', Tahoma, Arial, Verdana sans-serif;
+    }
+    .styledForm span{
+        display:block;
+        text-align:left;
+        padding-left:60px;
+        padding-bottom:3px;
+    }
+
+    #applicationFile{
+        display:block;
+        margin:auto;
+        border: 1px solid black;
+        width:275px;
+        border-radius:5px;
+        padding:5px;
+    }
+
+    .leftBox{
+        position:relative;
+        width: 399px;
+        height:255px;
+        float:left;
+        border-right: 1px solid #cacaca;
+    }
+
+    .rightBox{
+        position:relative;
+        width:399px;
+        float:right;
+    }
+
+    #addApplication{
+        position:relative;
+    }
+    #comment{
+        width:380px;
+        height:250px;
+        border-color:black;
+        color:#000;
+        border-radius:5px;
+    }
+    #uploadFile{
+        width:380px;
+        margin-bottom:20px;
+        background: #fff;
+        border:none;
+        text-align:center;
+        color:#000;
+    }
+
+
+   .fileUpload {
+        width:275px;
+        position: relative;
+        overflow: hidden;
+        margin: 10px;
+        color:#fff;
+    }
+    .fileUpload input.upload {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 0;
+
+        padding-right:10px;
+        font-size: 20px;
+        cursor: pointer;
+        opacity: 0;
+        filter: alpha(opacity=0);
+    }
+    #submitBtn{
+        position:relative;
+        margin-left:650px;
+        margin-top:20px;
+        width:55px;
+    }

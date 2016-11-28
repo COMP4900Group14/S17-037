@@ -1,0 +1,769 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: 'Source Sans Pro','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-weight: 400;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color:rgba(231, 232, 237, 1); /*f1f1f1*/
+}
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set widths on the form inputs since otherwise they're 100% wide */
+input,
+select,
+textarea {
+    max-width: 580px;
+}
+
+li{
+    position:relative;
+}
+
+/* Carousel */
+.carousel-caption {
+    z-index: 10 !important;
+}
+
+    .carousel-caption p {
+        font-size: 20px;
+        line-height: 1.4;
+    }
+
+@media (min-width: 768px) {
+    .carousel-caption {
+        z-index: 10 !important;
+    }
+
+}
+
+#rendersection{
+    display: block;
+    width:100%;
+    height: 100%;
+    border: 1px solid rgba(230, 231, 236, 1);
+}
+
+#menu-toggle{
+    color: white;
+    font-size:26px;
+    background:rgba(51, 121, 182, 1); /*00a65a 222d32*/
+}
+
+
+#menu-toggle:hover{
+    color: #e8e2e2;
+}
+
+#login-style{
+    margin-right:20px;
+}
+
+.overRide-navbar-color{
+    color: #b8c7ce !important; /*fff*/
+    background-color:#222d32 !important;
+    font-size:12px;
+}
+
+.overRide-navbar-color:hover{
+    background:#1e282c !important;
+    color:#fff !important;
+    border-left:3px solid #fff !important; /*00a65a*/
+    position:relative !important;
+    text-shadow: none !important;
+}
+
+.overRide-navbar-color:hover > .rightTriangle{
+    visibility: visible;
+}
+
+.rightTriangle{
+	width: 0; 
+	height: 0; 
+    left:0;
+	border-top: 7px solid transparent;
+	border-bottom: 7px solid transparent;
+	border-left: 7px solid #fff;
+    position: absolute;
+    top:23px;
+    visibility:hidden;
+}
+
+
+#productToggle{
+    position:relative;
+    background:#222d32;
+    font-size:12px;
+}
+
+#productToggle:hover{
+    background:#1e282c;
+    color:#fff;
+    border-left:3px solid #fff;
+}
+
+#productToggle:hover > .rightTriangle{
+    visibility:visible;
+}
+
+#adminToggle{
+    position:relative;
+    background:#222d32;
+    font-size:12px;
+}
+
+#adminToggle:hover{
+    background:#1e282c;
+    color:#fff;
+    border-left:3px solid #fff;
+}
+
+#adminToggle:hover > .rightTriangle{
+    visibility:visible;
+}
+
+#adminToggle:hover > #adminGlyph{
+    transition: 0.9s;
+    -webkit-transform:rotateX(360deg);
+    -moz-transform:rotateX(360deg);
+    -o-transform:rotateX(360deg);
+    transform:rotateX(360deg)
+}
+
+#productToggle:hover > #productGlyph{
+    transition: 0.9s;
+    -webkit-transform:rotateX(360deg);
+    -moz-transform:rotateX(360deg);
+    -o-transform:rotateX(360deg);
+    transform:rotateX(360deg)
+}
+
+#productToggle i{
+    -webkit-transition:-webkit-transform .5s;
+    -moz-transition:-moz-transform .5s;
+    -o-transition:-o-transform .5s;
+    transition:transform .5s;
+    -webkit-transform-style:preserve-3d;
+    -moz-transform-style:preserve-3d;
+    -o-transform-style:preserve-3d;
+    transform-style:preserve-3d;
+    position:relative;
+    border-radius:4px;
+}
+
+#adminToggle i{
+    -webkit-transition:-webkit-transform .5s;
+    -moz-transition:-moz-transform .5s;
+    -o-transition:-o-transform .5s;
+    transition:transform .5s;
+    -webkit-transform-style:preserve-3d;
+    -moz-transform-style:preserve-3d;
+    -o-transform-style:preserve-3d;
+    transform-style:preserve-3d;
+    position:relative;
+    border-radius:4px;
+}
+
+.navbarActivate:hover{
+    background:#41adff !important;
+}
+
+/*!
+ * Start Bootstrap - Simple Sidebar HTML Template (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+
+/* Toggle Styles */
+
+#wrapper {
+    padding-left: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled {
+    padding-left: 250px;
+}
+
+#sidebar-wrapper {
+    z-index: 1000;
+    position: fixed;
+    left: 250px;
+    width: 0;
+    height: 100%;
+    margin-left: -250px;
+    overflow-y: auto;
+    background: #222d32; 
+    -webkit-transition: all 0.7s ease;
+    -moz-transition: all 0.7s ease;
+    -o-transition: all 0.7s ease;
+    transition: all 0.7s ease;
+    /*border-right-style:solid;
+    border-width:1px;
+    border-color:black;
+    box-shadow: 1px -20px 1px #1e1d1d;*/
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    width: 200px; /* used to be 250px */
+}
+
+#page-content-wrapper {
+    width: 100%;
+    position: absolute;
+    padding: 15px;
+}
+
+#wrapper.toggled #page-content-wrapper {
+    position: absolute;
+    margin-right: -250px;
+}
+
+
+
+/* Sidebar Styles */
+
+.sidebar-nav {
+    position: absolute;
+    top: 0;
+    width: 250px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sidebar-nav li {
+    text-indent: 20px;
+    line-height: 40px;
+}
+
+.sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    color: #999999;
+}
+
+.sidebar-nav li a:hover {
+    text-decoration: none;
+    color: #2d67ff;
+    background: rgba(255,255,255,0.2);
+}
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+    text-decoration: none;
+}
+
+.sidebar-nav > .sidebar-brand {
+    height: 65px;
+    font-size: 18px;
+    line-height: 60px;
+}
+
+.sidebar-nav > .sidebar-brand a {
+    color: #999999;
+}
+
+.sidebar-nav > .sidebar-brand a:hover {
+    color: #fff;
+    background: none;
+}
+
+@media(min-width: 750px) { /* 750 px prior*/
+    #wrapper {
+        padding-left: 170px; /*250px prior*/
+    }
+
+    #wrapper.toggled {
+        padding-left: 0;
+    }
+
+    #sidebar-wrapper {
+        width: 170px;       /*used to be 250 px*/
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        width: 0;
+    }
+
+    #page-content-wrapper {
+        padding: 0px;
+        position: relative;
+    }
+
+    #wrapper.toggled #page-content-wrapper {
+        position: relative;
+        margin-right: 0;
+    }
+}
+
+
+
+
+
+/* Start of drop down sidebar menu */
+/*remove list style (circles)*/
+.goo-collapsible{	
+	list-style: none;
+    font-size:14px;
+
+}
+
+
+/*header line style and border*/
+.goo-collapsible li.header{
+	color: #aeacac;
+    padding:4px 12px;
+    border:  none; /*border: 1px solid #aeacac; */
+
+}
+
+
+/*set border for every line of menu nad remove top border becouse we dont want double border with header border. */
+.goo-collapsible li { 
+    border:  none; /*border: 1px solid #aeacac; */
+    border-top:0;
+    margin: 0;
+    background: #141212;
+}
+
+
+/*remove decoration from text links and treat it as a block.*/
+.goo-collapsible li a {
+	text-decoration:none;
+    color:#aeacac;
+    display:block;
+    padding:8px 12px;
+
+}
+
+
+/*we dont want text to be underline as regular link*/
+.goo-collapsible li a:hover {
+	background: #444141; 
+    text-decoration:none;
+
+}
+
+
+/*remove list style (circles) for submenu*/    
+.goo-collapsible li ul {
+	list-style: none;
+    background: #d3d3d3; 
+    display: none;
+    margin:0;
+    padding:0;
+
+
+}
+
+
+/*remove border and set only bottom border for submenu*/    
+.goo-collapsible li ul li {
+	margin:0; 
+    border:0; 
+    /*border-bottom:1px solid #aeacac;*/
+}
+
+
+/*remove bottom border from last element in submenu*/    
+.goo-collapsible li ul li:last-child {
+	/*border-bottom:1px solid #aeacac;*/
+
+}
+
+.goo-collapsible li ul li:first-child{
+   /* border-top:1px solid #aeacac;*/
+}
+
+/*set padding for submenu to be inline with maimenu*/    
+.goo-collapsible li ul li a {
+	padding: 5px 10px; 
+    display: block; 
+    padding-left: 27px; /*33*/
+    background: #25383C;
+    color:#b8c7ce;
+    font-size:12px;
+
+}
+
+
+/*remove text decoration for links*/
+.goo-collapsible li ul li a:hover {
+    text-decoration: none;
+    background: #25383C;
+    color:#fff;
+}
+
+/*for menu witch have a submenu display some icom*/
+.goo-collapsible .dropdown > a { 
+	background: #222d32;
+    color: #b8c7ce;
+
+}
+
+/*set some hover color on drop down menu*/
+.goo-collapsible .dropdown > a:hover { 
+
+}
+
+
+/*////////////////////////////////////////////////////////////////////////////
+*
+* Test User Interface - Mobile style
+* https://www.iconfinder.com/free_icons  (all icons are open source)
+* https://www.iconfinder.com/iconsets/hex-ico
+*
+*/
+
+.appContainer{
+    display:block;
+    margin:auto;
+    margin-top:170px;
+    width:425px;
+    height:900px;
+}
+
+.appMimic {
+    position: relative;
+    margin: auto;
+    border-radius: 25px;
+    border: 0px solid #000;
+    width: 80px;
+    height: 80px;
+    display: inline-block;
+    margin-right: 30px;
+    margin-bottom: 1px;
+    -webkit-transition: 0.2s linear;
+    -moz-transition: 0.2s linear;
+    -ms-transition: 0.2s linear;
+    -o-transition: 0.2s linear;
+}
+
+.appText{
+    width:80px;
+    margin-right:30px;
+    position:relative;
+    display:inline-block;
+    font-size:11px;
+    text-align:center;
+    margin-bottom:35px;
+	color: #222;
+	font: 'LeagueGothicRegular';
+}
+
+@media (max-width: 400px){
+
+    .appContainer {
+        margin-top: 30px;
+        width: 100%;
+    }
+
+    .appMimic{
+           background-repeat:no-repeat !important;
+           width:100%;
+           height:70px;
+    }
+
+    .appMimic:hover{
+        transform: translateX(80px) !important;
+    }
+
+    .appText{
+      display:none;
+    }
+}
+
+.appMimic:hover{
+    -webkit-transform:rotateZ(360deg);
+    -moz-transform:rotateZ(360deg);
+    -o-transform:rotateZ(360deg);
+    transform: scale(1.25);
+    opacity:0.9;
+}
+
+/*--------------------------------------------------------------------*/
+
+.headingTextLogos{
+    color:white;
+	text-shadow: 0px 1px 0px #999, 0px 1px 0px #888, 0px 1px 0px #777, 0px 1px 0px #666;
+	font:  50px 'ChunkFiveRegular';
+    letter-spacing:-3px;
+    display:inline-block;
+}
+
+
+#settings {
+    background: rgba(230, 231, 236, 1) url('../images/setting2.png');
+    background-size: contain;
+
+}
+
+#news{
+    background: rgba(230, 231, 236, 1) url('../images/news.png');
+    background-size: contain;
+}
+
+
+#contactUs{
+    background: rgba(230, 231, 236, 1) url('../images/contactUs.png');
+    background-size: contain;
+}
+
+#adminIcon{
+    background: rgba(230, 231, 236, 1) url('../images/admin.png');
+    background-size: contain;
+    margin-right:0;
+}
+#uploadFileIcon{
+    background: rgba(230, 231, 236, 1) url('../images/uploadFileIcon.png');
+    background-size: contain;
+}
+#documentationIcon{
+    background: rgba(230, 231, 236, 1) url('../images/documentation.png');
+    background-size: contain;
+}
+
+#events{
+    background: rgba(230, 231, 236, 1) url('../images/event.png');
+    background-size: contain;
+    margin-right:0;
+}
+
+#downloadIcon{
+    background: rgba(230, 231, 236, 1) url('../images/download.png');
+    background-size: contain;
+}
+
+.alignRightDiv{
+    margin-right:0;
+}
+
+
+.centerBlock{
+    display:block;
+    width:100px;
+    position:relative;
+    margin:auto;
+}
+
+.centerTextBlock{
+    display:block;
+    width:86%;
+    margin:auto;
+    margin-top:50px;
+    color:rgba(51, 121, 182, 1);
+    background: #fff;
+}
+
+.btn:hover{
+      background:#41adff;
+      color:#fff;
+}
+
+/* Modals */
+
+.modalBody{
+    border: 3px solid rgba(51, 121, 182, 1);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 15px;
+}
+.modalBody{
+    margin:auto;
+    display:block;
+    text-align:center;
+    color: rgba(51, 121, 182, 1)
+}
+.modalBody input, select{
+    color: #000;
+    width:100%;
+    margin-bottom:22px;
+    text-align:center
+}
+
+.modalBody label{
+    display: inline;
+    width:100%;
+}
+
+.modalBody label > input{
+    width: 10px;
+}
+
+.x{
+    color: crimson;
+}
+.styled-select {
+    width:275px;
+    font-size: 16px;
+    line-height: 1;
+    border: 0;
+    border-radius: 5px;
+    border: 1px solid #1e1d1d;
+    height: 34px;
+}
+
+/* https://www.freshdesignweb.com/css3-buttons/ */
+.coolbtn {
+  display: inline-block;
+  background: #e2e2e2;
+  border: 0;
+  line-height: 2.5em;
+  padding: 0 0 0 1em;
+  margin-bottom: 1em;
+  outline: none;
+  text-decoration: none;
+  color: #666;
+}
+.coolbtn .arrow {
+  display: inline-block;
+  line-height: 2.5em;
+  text-align: center;
+  background: #333;
+  color: white;
+  font-size: 1em;
+  width: 2.5em;
+  -webkit-transition: margin 200ms;
+  transition: margin 200ms;
+  margin-left: .75em;
+}
+.coolbtn:hover .arrow {
+  margin-left: 1.25em;
+  background-color: #262626;
+}
+.coolbtn:active {
+  background: #ccc;
+}
+.coolbtn:active .arrow {
+  margin-left: 1.5em;
+}
+
+.btn-info .arrow {
+  background-color: indianred;
+}
+.btn-info:hover .arrow {
+  background-color: #c14e4e;
+}
+
+.btn-learn .arrow {
+  background-color: salmon;
+}
+.btn-learn:hover .arrow {
+  background-color: #f56d5e;
+}
+
+button::-moz-focus-inner {
+  border: none;
+}
+
+
+hr {
+  border: 1px solid #e3e3e3;
+}
+
+.left {
+  text-align: left;
+}
+
+.right {
+  text-align: right;
+}
+
+.center {
+  text-align: center;
+}
+
+
+
+/*--------------------------------flat buttons -------------------*/
+/*
+    Name:           ph-buttons
+    Description: 	Pixcil Hub Buttons
+    Author: 		   Pixcils®
+    Version: 	  	1.0
+*/
+
+/*Main button class
+==========================*/
+.ph-button {
+	
+    border-style: solid;
+    border-width: 0px 0px 3px;
+    box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
+    color: #FFFFFF;	   
+    border-radius: 6px;
+    cursor: pointer;
+    display: inline-block;
+    font-style: normal;
+    overflow: hidden;
+    text-align: center;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    transition: all 200ms ease-in-out 0s;
+    white-space: nowrap;	
+    font-family: "Gotham Rounded A","Gotham Rounded B",Helvetica,Arial,sans-serif;
+    font-weight: 700;	
+    font-size: 18px;
+    padding-top:5px;
+	
+}
+/*Green
+==========================*/
+.ph-btn-green {
+    border-color: #3AC162;
+	background-color: #5FCF80;
+
+}
+.ph-btn-green:hover, .ph-btn-green:focus, .ph-btn-green:active {
+    background-color: #4BC970;
+    border-color: #3AC162;    
+}
+
+/*Blue
+==========================*/
+.ph-btn-blue {
+
+    border-color: #326E99;
+    background-color: #3F8ABF;
+}
+
+.ph-btn-blue:hover, .ph-btn-blue:focus, .ph-btn-blue:active {
+    background-color: #397CAC;
+    border-color: #326E99;   
+}
+
+/*Grey
+==========================*/
+.ph-btn-grey {
+
+     background-color: #C6CCD2;
+     border-color: #AAB3BB;
+}
+.ph-btn-grey:hover, .ph-btn-grey:focus, .ph-btn-grey:active {
+    background-color: #B8BFC7;
+    border-color: #AAB3BB; 
+}
+
+/*Red
+==========================*/
+.ph-btn-red {
+
+    background-color: #ED5A5A !important;
+    border-color: #EA4343 !important;
+
+}
+.ph-btn-red:hover, .ph-btn-red:focus, .ph-btn-red:active {
+    background: none repeat scroll 0 0 #EB4848 !important;
+    border-color: #E83131 !important;    
+}

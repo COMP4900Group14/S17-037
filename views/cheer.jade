@@ -33,7 +33,7 @@ block content
 								}
 								concat += "and " + data[data.length - 1];
 							}
-							alert("The swear word(s) " + concat + concat2 + " detected . Do you wish to continue? Please keep in mind this is a compliment only system.");
+							alert("The swear word(s) " + concat + concat2 + ". Do you wish to continue? Please keep in mind this is a compliment only system.");
 						}
 					});
 				});
@@ -50,6 +50,8 @@ block content
 					textarea(id="text" name="text" rows="4" cols="50" spellcheck="true" required)
 					button.btn.btn-default(type='submit' id="swearing" name="swearing" value="false") Submit
 		script.
+		br
+		a(href="/") Back to the homepage
 	if(!active)
 		p Your account isn't activated. Please activated with the confirmation email.
 		br
