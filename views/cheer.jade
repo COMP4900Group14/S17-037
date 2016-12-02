@@ -48,10 +48,16 @@ block content
 						label(for='name' required) Name:
 						input(id='name' name='username')
 					textarea(id="text" name="text" rows="4" cols="50" spellcheck="true" required)
+					label(for='name' required) Select a picture to go with your compliment:
+					select(id="picture" name="picture")
+						option(value="0") none
+						option(value="1") teamwork
+						option(value="2") work ethic
+						option(value="3") smart idea
+						option(value="4") hard work
 					button.btn.btn-default(type='submit' id="swearing" name="swearing" value="false") Submit
 		script.
 		br
-		a(href="/") Back to the homepage
 	if(!active)
 		p Your account isn't activated. Please activated with the confirmation email.
 		br

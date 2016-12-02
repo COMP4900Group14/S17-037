@@ -6,10 +6,16 @@ html
 		meta(name='description', content='Welcome to the kudos submission site, here you can acknowledge your fellow workers!')
 		meta(name='keywords', content='BCSSC, Kudos, Employee Acknowledgement')
 		title Submit Kudos
-		// Bootstrap
-		link(rel='stylesheet', href='./stylesheets/bootstrap.css')
+		link(href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css', rel='stylesheet', media='screen')
+		link(rel='stylesheet', href='./stylesheets/style.css')
+		link(rel='stylesheet', href='https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css')
+		script(src='./scripts/jquery.min.js')
+		script(src='./scripts/bootstrap.min.js')
+		script(src='https://code.jquery.com/ui/1.12.1/jquery-ui.js')
+		script(src='./scripts/jquery.profanityfilter.js')
 		// Master css
 		link(rel='stylesheet', href='./stylesheets/site.css')
+		
 	body
 		// http://ironsummitmedia.github.io/startbootstrap-simple-sidebar/#
 		// Top navigation pane
@@ -25,30 +31,43 @@ html
 						span.icon-bar
 					a#menu-toggle.navbar-brand.navbarActivate(href='#menu-toggle')
 						img(src='menu.png', style='width:40px;height:30px')
-					a.navbar-brand.navbarActivate(asp-controller='Home', asp-action='Index', style='width:115px;padding-top:17px;color:white;font-size:12px')
+					a.navbar-brand.navbarActivate(href="/", style='width:115px;padding-top:17px;color:white;font-size:12px')
 						| CHEER CHAT
 				// Collection of nav links, forms, and other content for toggling
 				#navbarCollapse.collapse.navbar-collapse(style='background-color:rgba(51, 121, 182, 1);')
 					ul.nav.navbar-nav
-						li
-							a.navbarActivate(asp-controller='Home', asp-action='Index') Profile
-						li.dropdown
-							a.dropdown-toggle.navbarActivate(data-toggle='dropdown', href='#')
-								| Menu
-								b.caret
-							ul.dropdown-menu(role='menu')
-								li.divider
-								li
-									a(href="/manager")  Account management
-								li.divider
-								li
-									a(href="/compliments")  Recieved Compliments
-								li.divider
-								li
-									a(href="/cheer")  Send Compliments
-								li.divider
-								li
-									a Report a problem
+						if(!user)
+							li
+								a(href="/login") Login
+							li
+								a(href="/register") Register
+						if(user)
+							li.dropdown
+								a.dropdown-toggle.navbarActivate(data-toggle='dropdown', href='#')
+									| #{user.username}
+									b.caret
+								ul.dropdown-menu(role='menu')
+									li.divider
+									li
+										a(href="/logout")  Logout
+									li
+							li.dropdown
+								a.dropdown-toggle.navbarActivate(data-toggle='dropdown', href='#')
+									| Menu
+									b.caret
+								ul.dropdown-menu(role='menu')
+									li.divider
+									li
+										a(href="/manager")  Account management
+									li.divider
+									li
+										a(href="/compliments")  Recieved Compliments
+									li.divider
+									li
+										a(href="/cheer")  Send Compliments
+									li.divider
+									li
+										a Report a problem
 		// Start of left-sidebar
 		#wrapper
 			// Sidebar
@@ -74,14 +93,16 @@ html
 			#page-content-wrapper
 				#rendersection
 					// Begin body section (actual content goes here)
-					link(href='./stylesheets/forumui.css', rel='stylesheet')
+					//link(href='./stylesheets/forumui.css', rel='stylesheet')
+					//br
+					//p(style='width:86%;margin:auto;text-align:right')
+					//	a(href='#')  Home 
+					//	|  > 
+					//	a(href='#')  Profile 
+					//	|  > 
+					//	span(style='color:green')  Send Kudos (current page)
 					br
-					p(style='width:86%;margin:auto;text-align:right')
-						a(href='#')  Home 
-						|  > 
-						a(href='#')  Profile 
-						|  > 
-						span(style='color:green')  Send Kudos (current page)
+					br
 					style(scoped='').
 						.progress {
 						position: relative;
@@ -115,15 +136,11 @@ html
 						function validatePublish() {
 						return true;
 						}
-						document.getElementById("applicationFile").onchange = function () {
-						document.getElementById("uploadFile").value = this.files[0].name;
-						};
+						//document.getElementById("applicationFile").onchange = function () {
+						//document.getElementById("uploadFile").value = this.files[0].name;
+						//};
 					// end actual content
 					p.text-center(style='margin-top:1000px')
 						i.glyphicon.glyphicon-copyright-mark
 						|  2016 - Cheer App
-					
-		script(src='./scripts/jquery.min.js')
-		script(src='./scripts/bootstrap.min.js')
-		script(src='./scripts/site.js')
 		

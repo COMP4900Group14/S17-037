@@ -5,12 +5,16 @@ block content
 		script.
 			console.log(JSON.parse('!{usernames}'));
 			$( function() { 
+				console.log('!{usernames}');
 				$("#name").autocomplete({
 				source: JSON.parse('!{usernames}')
 				});
+				console.log("parse complete");
 			});
 		.container
 			h1 Please select your manager so he/she can be notified about any compliments you receive:
+			if(error)
+				h1 #{error}
 			br
 			form(role='form', action="/managerReq" ,method="post", style='max-width: 300px;')
 				.form-group

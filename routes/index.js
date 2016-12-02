@@ -42,7 +42,7 @@ router.get('/', function (req, res) {
 			console.log("visible: " + compliment.visible + " swearing: " + compliment.swearing);
 			if(compliment.visible && !compliment.swearing) {
 				console.log("MESSAGES PUSHED")
-				messages.push(compliment.message);
+				messages.push(compliment);
 			}
 		});
 		res.render('index', { user : req.user, messages: messages});
@@ -72,9 +72,12 @@ router.get('/register', function(req, res) {
 
 router.post('/register', function(req, res, next) {
 	var actcode = randomstring.generate(32);
+	/*Account.find({username: req.body.username}, function(err, user) {
+		console.log("user already exists!")
+	});*/
 	Account.register(new Account({ username : req.body.username, active: false, actcode: actcode, manager: "null"}), req.body.password, function(err, account) {
 		if (err) {
-		  return res.render('register', { error : err.message });
+		  return res.render('register', { error : true });
 		}
 
 		passport.authenticate('local')(req, res, function () {
@@ -95,7 +98,7 @@ router.post('/register', function(req, res, next) {
 					to: 'Gaston.E.Beaucage@gmail.com', // list of receivers
 					subject: 'Account creation confirmation', // Subject line
 					text: 'SMTP does not support html', // plaintext body
-					html: '<a href="http://' + localip + ':3000/actcode?username=' + req.body.username +'&actcode=' + actcode + '">Complete registration</a> ' // html body
+					html: '<a href="http://' + localip + ':3000/actcode?username=' + req.body.username + '&actcode=' + actcode + '">Complete registration for ' + req.body.username + ' </a> ' // html body
 				};
 				
 				transporter.sendMail(mailOptions, function(error, info){
@@ -146,10 +149,10 @@ router.get('/cheer', function(req, res) {
 			Account.find({username: req.user.username}, function(err, user) {
 				if (err) throw err;
 				console.log(req.user);
-				res.render('cheer', {usernames : JSON.stringify(usernames), active : user[0].active});
+				res.render('cheer', {usernames : JSON.stringify(usernames), active : user[0].active, user: req.user});
 			});
 		} else {
-			res.render('cheer', {usernames : JSON.stringify(usernames), active : false});
+			res.render('cheer', {usernames : JSON.stringify(usernames), active : false, user: req.user});
 		}
 	});
 });
@@ -174,7 +177,7 @@ router.post('/cheer', function(req, res) {
 		html: '<b>'+ req.body.text +'</b>'
 	};
 
-	var compliment = new Compliment({sender: req.user.username, receiver: req.body.username, message: req.body.text, number: messageCount++, swearing: req.body.swearing, visible: true});
+	var compliment = new Compliment({sender: req.user.username, receiver: req.body.username, message: req.body.text, number: messageCount++, swearing: req.body.swearing, visible: true, picture: req.body.picture});
 	compliment.save(function(err) {
 	  if (err) throw err;
 
@@ -193,14 +196,34 @@ router.post('/cheer', function(req, res) {
 
 router.get('/compliments', function(req, res) {
 	if(req.user) {
+		var employeeMessages = []
 		Compliment.find({receiver: req.user.username}, function(err, compliments) {
 			if (err) throw err;
 			console.log(compliments)
 			var messages = [];
 			compliments.forEach(function(compliment) {
-				messages.push(compliment);
+				if(!compliment.swearing) {
+					messages.push(compliment);
+				}
 			});
-			res.render('compliments', {compliments : messages, user : req.user});
+			Account.find({}, function(err, accounts) {
+				if (err) throw err;
+				accounts.forEach(function(account) {
+					console.log(account.manager + " " + req.user.username);
+					if(account.manager.localeCompare(req.user.username) == 0) {
+						console.log("inside");
+						Compliment.find({receiver: account.receiver}, function(err, compliments) {
+							if (err) throw err;
+							compliments.forEach(function(compliment) {
+								employeeMessages.push(compliment);
+							});
+						});
+					}
+				});
+			});
+			console.log("----------------------employeeComs");
+			console.log(employeeMessages)
+			res.render('compliments', {compliments : messages, user : req.user, employeeComs: employeeMessages});
 		});
 	} else {
 		res.render('compliments',  {});
@@ -227,7 +250,7 @@ router.get('/manager', function(req, res) {
 			Account.find({username: req.user.username}, function(err, user) {
 				if (err) throw err;
 				//console.log(req.user);
-				res.render('manager', {usernames : JSON.stringify(usernames), active : user[0].active, currentMan: (user[0].manager.localeCompare("null") == 0) ? "no current manager" : user[0].manager, currentReq: JSON.stringify(requests)});
+				res.render('manager', {usernames : JSON.stringify(usernames), active : user[0].active, currentMan: (user[0].manager.localeCompare("null") == 0) ? "no current manager" : user[0].manager, currentReq: JSON.stringify(requests), user: req.user});
 			});
 		} else {
 			res.render('manager', {usernames : JSON.stringify(usernames), active : false});
@@ -236,29 +259,26 @@ router.get('/manager', function(req, res) {
 });
 
 router.post('/managerReq', function(req, res) {
-	//console.log("user----------------------");
-	//console.log(req.body);
-	//console.log(req.user);
 	Account.find({username: req.user.username}, function(err, user) {
-		if(user[0] == undefined) {
-			console.log("user not found");
-			return;
-		}
-		if (err) throw err;
-		user[0].manager = req.body.managername;
-		user[0].save(function(err) {
+		Account.find({username: req.body.managername}, function(err, manager) {
+			if(manager[0] == undefined) {
+				console.log("manager not found");
+				//res.render('manager', {error: "That manager doesn't exist. Please try again", usernames : JSON.stringify(usernames), active : user[0].active, currentMan: (user[0].manager.localeCompare("null") == 0) ? "no current manager" : user[0].manager, currentReq: JSON.stringify(requests)});
+				return;
+			}
 			if (err) throw err;
-			console.log(user[0]);
-			console.log('Account manager updated successfully!');
+			user[0].manager = req.body.managername;
+			user[0].save(function(err) {
+				if (err) throw err;
+				console.log(user[0]);
+				console.log('Account manager updated successfully!');
+			});
 		});
 	});
 	res.redirect('/manager');
 });
 
 router.post('/removeMan', function(req, res) {
-	//console.log("user----------------------");
-	//console.log(req.body);
-	//console.log(req.user);
 	Account.find({username: req.user.username}, function(err, user) {
 		if(user[0] == undefined) {
 			console.log("user not found");
@@ -276,9 +296,6 @@ router.post('/removeMan', function(req, res) {
 });
 
 router.post('/managerRem', function(req, res) {
-	//console.log("user----------------------");
-	//console.log(req.body);
-	//console.log(req.user);
 	Account.find({username: req.body.nametoremove}, function(err, user) {
 		if(user[0] == undefined) {
 			console.log("user not found");

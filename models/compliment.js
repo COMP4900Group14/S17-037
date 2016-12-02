@@ -8,7 +8,8 @@ var Compliment = new Schema({
 	message: String,
 	swearing: Boolean,
 	visible: Boolean,
-	number: Number
+	number: Number,
+	picture: Number
 });
 
 module.exports = mongoose.model('compliment', Compliment);
