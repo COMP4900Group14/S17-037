@@ -5,7 +5,16 @@ var Compliment = require('../models/compliment');
 var router = express.Router();
 var nodemailer = require("nodemailer");
 var randomstring = require("randomstring");
+
 var messageCount = 0;
+Compliment.find({}, function(err, messages) {
+	messages.forEach(function(message) {
+		if(message.number > messageCount) {
+			messageCount = message.number;
+		}
+	});
+});
+
 
 var os = require('os');
 var ifaces = os.networkInterfaces();
@@ -39,6 +48,8 @@ router.get('/', function (req, res) {
 		if (err) throw err;
 		var messages = [];
 		compliments.forEach(function(compliment) {
+			//console.log("------------------");
+			//console.log(compliment.message);
 			console.log("visible: " + compliment.visible + " swearing: " + compliment.swearing);
 			if(compliment.visible && !compliment.swearing) {
 				console.log("MESSAGES PUSHED")
@@ -196,34 +207,28 @@ router.post('/cheer', function(req, res) {
 
 router.get('/compliments', function(req, res) {
 	if(req.user) {
-		var employeeMessages = []
 		Compliment.find({receiver: req.user.username}, function(err, compliments) {
 			if (err) throw err;
-			console.log(compliments)
 			var messages = [];
 			compliments.forEach(function(compliment) {
 				if(!compliment.swearing) {
 					messages.push(compliment);
 				}
 			});
-			Account.find({}, function(err, accounts) {
+			Account.find({manager: req.user.username}, function(err, accounts) {
 				if (err) throw err;
 				accounts.forEach(function(account) {
-					console.log(account.manager + " " + req.user.username);
-					if(account.manager.localeCompare(req.user.username) == 0) {
-						console.log("inside");
-						Compliment.find({receiver: account.receiver}, function(err, compliments) {
-							if (err) throw err;
-							compliments.forEach(function(compliment) {
-								employeeMessages.push(compliment);
-							});
+					console.log("receiver" + account.username);
+					Compliment.find({receiver: account.username}, function(err, compliments) {
+						if (err) throw err;
+						var employeeMessages = [];
+						compliments.forEach(function(compliment) {
+							employeeMessages.push(compliment);
 						});
-					}
+						res.render('compliments', {compliments : messages, user : req.user, employeeComs: employeeMessages});
+					});
 				});
 			});
-			console.log("----------------------employeeComs");
-			console.log(employeeMessages)
-			res.render('compliments', {compliments : messages, user : req.user, employeeComs: employeeMessages});
 		});
 	} else {
 		res.render('compliments',  {});
@@ -322,7 +327,7 @@ router.post('/messageInvisible', function(req, res) {
 		}
 		if (err) throw err;
 		message[0].visible = false;
-		console.log("-------------");
+		console.log("-------------message invisible");
 		console.log(message[0].visible)
 		message[0].save(function(err) {
 			if (err) throw err;

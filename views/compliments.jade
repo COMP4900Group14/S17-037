@@ -15,10 +15,7 @@ block content
 			h1 Messages sent to people you manage!
 			ul
 				for employeeCom in employeeComs
-					li #{compliment.message} from: #{compliment.sender}
-					form(role='form', action="/messageInvisible" ,method="post", style='max-width: 300px;')
-						.form-group
-							button.btn.btn-default(type='submit' name='messageNumber' value="#{compliment.number}") Make priva
+					li #{employeeCom.message} from: #{employeeCom.sender}
 		br
 		a(href="/") Back to the homepage
 	if (!user)
