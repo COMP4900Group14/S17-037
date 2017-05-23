@@ -1,0 +1,15 @@
+extends layout
+
+block content
+	.container
+		h1 Add a vehicle operator to your team
+		form(role='form', action="/addOp",method="post", style='max-width: 300px;')
+			.form-group
+					label(for="sel1") Select user to add:
+					select.form-control(id="sel1", name="username")
+						for vehicleOp in vehicleOps
+							option(value="#{vehicleOp}") #{vehicleOp}
+			button.btn.btn-default(type='submit') Submit
+			&nbsp;
+			a(href='/')
+				button.btn.btn-primary(type="button") Cancel

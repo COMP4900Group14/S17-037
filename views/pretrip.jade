@@ -1,0 +1,453 @@
+extends layout
+
+block content
+	h3 Pre-trip Inspection Form
+	form#derpform.form-inline(action='/pretrip', method='POST', enctype="multipart/form-data")
+		.form-group
+		.col-lg-3.col-md-6.col-sm-6.col-xs-12
+			label(for='vehicleLicencePlate_') plate number:
+			br
+			input#program.form-control(type='text', name='vehicleLicencePlate_', placeholder='plate', required='true')
+		.col-lg-3.col-md-6.col-sm-6.col-xs-12
+			label(for='fleet') Fleet:
+			br
+			input#fleet.form-control(type='text', name='fleet_', placeholder='fleet' required='true')
+		.col-lg-12.col-md-12.col-xs-12
+			hr#linebreaker
+		// LIGHTING
+		h3 LIGHTING
+		.col-lg-12.col-md-12.col-xs-12
+			div
+				br
+				.row.bg-info
+					.col-lg-8.col-md-8.col-xs-8
+						label(for='backUpLights') BackUp Lights: 
+					.col-lg-2.col-md-2.col-xs-1
+						input#backUpLights(type="checkbox", name='backUpLighs_', value='backUpLights')
+				br
+				.row.bg-info
+					.col-lg-8.col-md-8.col-xs-8
+						label(for='brakeLights') Brake Lights: 
+					.col-lg-2.col-md-2.col-xs-1
+						input#brakeLights(type="checkbox", name='brakeLights_', value='brakeLights')
+				br
+				.row.bg-info
+					.col-lg-8.col-md-8.col-xs-8
+						label(for='emergencyFlashers') Emergency Flashers: 
+					.col-lg-2.col-md-2.col-xs-1
+						input#emergencyFlashers(type="checkbox", name='emergencyFlashers_', value='emergencyFlashers')
+				br
+				.row.bg-info
+					.col-lg-8.col-md-8.col-xs-8
+						label(for='headLights_high_low') Head Lights (high/low):
+					.col-lg-2.col-md-2.col-xs-1
+						input#headLights_high_low(type="checkbox", name='headLights_high_low_', value='headLights_high_low')
+				br
+				.row.bg-info
+					.col-lg-8.col-md-8.col-xs-8
+						label(for='interiorLights') Interior Lights:
+					.col-lg-2.col-md-2.col-xs-1
+						input#interiorLights(type="checkbox", name='interiorLights_', value='interiorLights')
+				br
+				.row.bg-info
+					.col-lg-8.col-md-8.col-xs-8
+						label(for='sideMarkers') Side Markers:
+					.col-lg-2.col-md-2.col-xs-1
+						input#sideMarkers(type="checkbox", name='sideMarkers_', value='sideMarkers')
+				br
+				.row.bg-info
+					.col-lg-8.col-md-8.col-xs-8
+						label(for='turnSignals') Turn Signals:
+					.col-lg-2.col-md-2.col-xs-1
+						input#turnSignals(type="checkbox", name='turnSignals_', value='turnSignals')
+				br
+				.row.bg-info
+					.col-lg-8.col-md-8.col-xs-8
+						label(for='licensePlate') License Plate:
+					.col-lg-2.col-md-2.col-xs-1
+						input#licensePlate(type="checkbox", name='licensePlate_', value='licensePlate')
+				br
+				// FLUIDS
+				h3 FLUIDS
+				.row.bg-info
+					.col-lg-8.col-md-8.col-xs-8
+						label(for='oil') Oil:
+					.col-lg-2.col-md-2.col-xs-1
+						input#oil(type="checkbox", name='oil_', value='oil')
+				br
+				// TIRES
+				h3 TIRES
+				.row.bg-info
+					.col-lg-8.col-md-8.col-xs-8
+						label(for='visualPressureCheck') Visual Pressure Check:
+					.col-lg-2.col-md-2.col-xs-1
+						input#visualPressureCheck(type="checkbox", name='visualPressureCheck_', value='visualPressureCheck')
+				br
+				// misc
+				h3 MISCELANIOUS
+				.row.bg-info
+					.col-lg-8.col-md-8.col-xs-8
+						label(for='preAndPostTripBodyInspection') Pre and Post Trip Body Inspection:
+					.col-lg-2.col-md-2.col-xs-1
+						input#preAndPostTripBodyInspection(type="checkbox", name='preAndPostTripBodyInspection_', value='preAndPostTripBodyInspection')
+				br
+				.row.bg-info
+					.col-lg-8.col-md-8.col-xs-8
+						label(for='windshieldVisibility') Windshield Visibility:
+					.col-lg-2.col-md-2.col-xs-1
+						input#windshieldVisibility(type="checkbox", name='windshieldVisibility_', value='windshieldVisibility')
+				br
+				.row.bg-info
+					.col-lg-8.col-md-8.col-xs-8
+						label(for='mirrors') Mirrors:
+					.col-lg-2.col-md-2.col-xs-1
+						input#mirrors(type="checkbox", name='mirrors_', value='mirrors')
+				br
+				.row.bg-info
+					.col-lg-8.col-md-8.col-xs-8
+						label(for='steering') Steering:
+					.col-lg-2.col-md-2.col-xs-1
+						input#steering(type="checkbox", name='steering_', value='steering')
+				br
+				.row.bg-info
+					.col-lg-8.col-md-8.col-xs-8
+						label(for='horn') Horn:
+					.col-lg-2.col-md-2.col-xs-1
+						input#horn(type="checkbox", name='horn_', value='horn')
+				br
+				.row.bg-info
+					.col-lg-8.col-md-8.col-xs-8
+						label(for='fuelLevel') Fuel Level:
+					.col-lg-2.col-md-2.col-xs-1
+						input#fuelLevel(type="checkbox", name='fuelLevel_', value='fuelLevel')
+				br
+				.row.bg-info
+					.col-lg-8.col-md-8.col-xs-8
+						label(for='wipers') Wipers:
+					.col-lg-2.col-md-2.col-xs-1
+						input#wipers(type="checkbox", name='wipers_', value='wipers')
+				br
+				.row.bg-info
+					.col-lg-8.col-md-8.col-xs-8
+						label(for='seatBelts_lifts_straps') Seatbelts:
+					.col-lg-2.col-md-2.col-xs-1
+						input#seatBelts_lifts_straps(type="checkbox", name='seatBelts_lifts_straps_', value='seatBelts_lifts_straps')
+				br
+				// WEEKLY CHECK
+				// fluids_circleLevels
+				h3 Fluids/Circle Levels
+				.row.bg-info
+					.col-lg-4.col-md-4.col-xs-4
+						label(for='oil') Oil
+					.col-lg-6.col-md-6.col-xs-6
+						select#oil.selectpicker(name='oil_levels_')
+							option(value='0%') 0%
+							option(value='25%') 25%
+							option(value='50%') 50%
+							option(value='75%') 75%
+							option(value='100%') 100%
+				br
+				.row.bg-info
+					.col-lg-4.col-md-4.col-xs-4
+						label(for='coolant') Coolant
+					.col-lg-6.col-md-6.col-xs-6
+						select#coolant.selectpicker(name='coolant_levels_')
+							option(value='0%') 0%
+							option(value='25%') 25%
+							option(value='50%') 50%
+							option(value='75%') 75%
+							option(value='100%') 100%
+				br
+				.row.bg-info
+					.col-lg-4.col-md-4.col-xs-4
+						label(for='transmissionFluids') Transmission Fluids
+					.col-lg-6.col-md-6.col-xs-6
+						select#transmissionFluids.selectpicker(name='transmissionFluids_levels_')
+							option(value='0%') 0%
+							option(value='25%') 25%
+							option(value='50%') 50%
+							option(value='75%') 75%
+							option(value='100%') 100%
+				br
+				.row.bg-info
+					.col-lg-4.col-md-4.col-xs-4
+						label(for='powerSteering') Power Steering
+					.col-lg-6.col-md-6.col-xs-6
+						select#powerSteering.selectpicker(name='powerSteering_levels_')
+							option(value='0%') 0%
+							option(value='25%') 25%
+							option(value='50%') 50%
+							option(value='75%') 75%
+							option(value='100%') 100%
+				br
+				.row.bg-info
+					.col-lg-4.col-md-4.col-xs-4
+						label(for='brakeFluid') Brake Fluid
+					.col-lg-6.col-md-6.col-xs-6
+						select#brakeFluid.selectpicker(name='brakeFluid_levels_')
+							option(value='0%') 0%
+							option(value='25%') 25%
+							option(value='50%') 50%
+							option(value='75%') 75%
+							option(value='100%') 100%
+				br
+				.row.bg-info
+					.col-lg-4.col-md-4.col-xs-4
+						label(for='wiperFluid') Wiper Fluid
+					.col-lg-6.col-md-6.col-xs-6
+						select#wiperFluid.selectpicker(name='wiperFluid_levels_')
+							option(value='0%') 0%
+							option(value='25%') 25%
+							option(value='50%') 50%
+							option(value='75%') 75%
+							option(value='100%') 100%
+				br
+				// record condition
+				h3 RECORD CONDITION
+				.row.bg-info
+					.col-lg-4.col-md-4.col-xs-4
+						label(for='belts') Belts
+					.col-lg-6.col-md-6.col-xs-6
+						select#belts.selectpicker(name='belts_')
+							option(value='normal0') Normal
+							option(value='worn1') Worn
+				br
+				h3 Visual Checks
+				.row.bg-info
+					.col-lg-4.col-md-4.col-xs-4
+						label(for='leaks') Leaks
+					.col-lg-6.col-md-6.col-xs-6
+						select#leaks.selectpicker(name='leaks_')
+							option(value='none0') None
+							option(value='present1') Present
+				br
+				.row.bg-info
+					.col-lg-4.col-md-4.col-xs-4
+						label(for='battery') Battery
+					.col-lg-6.col-md-6.col-xs-6
+						select#battery.selectpicker(name='battery_')
+							option(value='normal0') Normal
+							option(value='low1') Low
+				br
+				.row.bg-info
+					.col-lg-4.col-md-4.col-xs-4
+						label(for='wiring') Wiring
+					.col-lg-6.col-md-6.col-xs-6
+						select#wiring.selectpicker(name='wiring_')
+							option(value='normal0') Normal
+							option(value='frayed1') Frayed
+				br
+				.row.bg-info
+					.col-lg-4.col-md-4.col-xs-4
+						label(for='hoses') Hoses
+					.col-lg-6.col-md-6.col-xs-6
+						select#hoses.selectpicker(name='hoses_')
+							option(value='normal0') Normal
+							option(value='leaking1') Leaking
+				br
+				.row.bg-info
+					.col-lg-4.col-md-4.col-xs-4
+						label(for='clamps') Clamps
+					.col-lg-6.col-md-6.col-xs-6
+						select#clamps.selectpicker(name='clamps_')
+							option(value='normal0') Normal
+							option(value='damaged1') Damaged
+				br
+				h3 TIRES
+				.row.bg-info
+					.col-lg-4.col-md-4.col-xs-4
+						label(for='measurePressure') Measure Pressure
+					.col-lg-6.col-md-6.col-xs-6
+						select#measurePressure.selectpicker(name='measurePressure_')
+							option(value='normal0') Normal
+							option(value='low1') Low
+				br
+				.row.bg-info
+					.col-lg-4.col-md-4.col-xs-4
+						label(for='lugNuts') Lug Nuts
+					.col-lg-6.col-md-6.col-xs-6
+						select#lugNuts.selectpicker(name='lugNuts_')
+							option(value='normal0') Normal
+							option(value='loose1') Loose
+				br
+				.row.bg-info
+					.col-lg-4.col-md-4.col-xs-4
+						label(for='treads') Treads
+					.col-lg-6.col-md-6.col-xs-6
+						select#treads.selectpicker(name='treads_')
+							option(value='normal0') Normal
+							option(value='low1') Low
+				br
+				.row.bg-info
+					.col-lg-4.col-md-4.col-xs-4
+						label(for='rims') Rims
+					.col-lg-6.col-md-6.col-xs-6
+						select#rims.selectpicker(name='rims_')
+							option(value='normal0') Normal
+							option(value='damaged1') Damaged
+				br
+				.row.bg-info
+					.col-lg-4.col-md-4.col-xs-4
+						label(for='spare') Spare
+					.col-lg-6.col-md-6.col-xs-6
+						select#spare.selectpicker(name='spare_')
+							option(value='present0') Present
+							option(value='missing1') Missing
+				br
+				h3 EMERGENCY EQUIPMENT
+				.row.bg-info
+					.col-lg-4.col-md-4.col-xs-4
+						label(for='flares') Flares
+					.col-lg-6.col-md-6.col-xs-6
+						select#flares.selectpicker(name='flares_')
+							option(value='present0') Present
+							option(value='missing1') Missing
+				br
+				.row.bg-info
+					.col-lg-4.col-md-4.col-xs-4
+						label(for='fireExtinguisher') Fire Extinguisher
+					.col-lg-6.col-md-6.col-xs-6
+						select#fireExtinguisher.selectpicker(name='fireExtinguisher_')
+							option(value='present0') Present
+							option(value='missing1') Missing
+				br
+				.row.bg-info
+					.col-lg-4.col-md-4.col-xs-4
+						label(for='jack_wheelWrench') Jack/Wheel Wrench
+					.col-lg-6.col-md-6.col-xs-6
+						select#jack_wheelWrench.selectpicker(name='jack_wheelWrench_')
+							option(value='present0') Present
+							option(value='missing1') Missing
+				br
+				.row.bg-info
+					.col-lg-4.col-md-4.col-xs-4
+						label(for='seatBeltClutter') Seat Belt Clutter
+					.col-lg-6.col-md-6.col-xs-6
+						select#seatBeltClutter.selectpicker(name='seatBeltClutter_')
+							option(value='present0') Present
+							option(value='missing1') Missing
+				br
+				.row.bg-info
+					.col-lg-4.col-md-4.col-xs-4
+						label(for='boosterCables') Booster Cables
+					.col-lg-6.col-md-6.col-xs-6
+						select#boosterCables.selectpicker(name='boosterCables_')
+							option(value='present0') Present
+							option(value='missing1') Missing
+				br
+				h3 MISCELLANIOUS
+				.row.bg-info
+					.col-lg-4.col-md-4.col-xs-4
+						label(for='vehicleDocument_insurance') Vehicle Document Insurance
+					.col-lg-6.col-md-6.col-xs-6
+						select#vehicleDocument_insurance.selectpicker(name='vehicleDocument_insurance_')
+							option(value='present0') Present
+							option(value='missing1') Missing
+				br
+				// notes
+				br
+				br
+				label(for='right_') Were all the issues with this vehicle fixed if any issues were present? If not please explain why in the NOTES selection
+				br
+				input(id="fixed", type="checkbox", name="fixed_")
+				br
+				label(for='notes') NOTES:
+				br
+				textarea#notes_(rows='10', col='40', name='notes_')
+				br
+				label(for='notes') FRONT VEHICLE IMAGE:
+				br
+				input(id="frontImage", type='file', name='front_', accept='image/*', required='true')
+				br
+				label(for='back_') BACK VEHICLE IMAGE:
+				br
+				input(id="backImage", type='file', name='back_', accept='image/*', required='true')
+				br
+				label(for='left_') LEFT VEHICLE IMAGE:
+				br
+				input(id="leftImage", type='file', name='left_', accept='image/*', required='true')
+				br
+				label(for='right_') RIGHT VEHICLE IMAGE:
+				br
+				input(id="rightImage", type='file', name='right_', accept='image/*', required='true')
+				br
+				
+				input(id="frontImageDate", type="date", name="front_date_", style="display:none")
+				input(id="backImageDate", type="date", name="back_date_", style="display:none")
+				input(id="leftImageDate", type="date", name="left_date_", style="display:none")
+				input(id="rightImageDate", type="date", name="right_date_", style="display:none")
+				.form-group
+					input.btn.btn-default(id="submitButton", type='submit', value='submit')
+	script.
+		document.getElementById("submitButton").onclick = function (event) {
+			var fileInput = document.getElementById("frontImage");
+			var file = fileInput.files[0];
+			var lastModified = file.lastModified;
+
+			var date = new Date(lastModified);
+			var month = date.getMonth() + 1;
+			if(month.toString().length == 1) {
+				month = "0" + month;
+			}  
+			var day = date.getDate();
+			if(day.toString().length == 1) {
+				day = "0" + day;
+			} 
+			var year = date.getFullYear();
+
+			document.getElementById("frontImageDate").value = year + "-" + month + "-" + day;
+			
+			
+			var fileInput = document.getElementById("backImage");
+			var file = fileInput.files[0];
+			var lastModified = file.lastModified;
+
+			var date = new Date(lastModified);
+			var month = date.getMonth() + 1;
+			if(month.toString().length == 1) {
+				month = "0" + month;
+			}  
+			var day = date.getDate();
+			if(day.toString().length == 1) {
+				day = "0" + day;
+			} 
+			var year = date.getFullYear();
+
+			document.getElementById("backImageDate").value = year + "-" + month + "-" + day;
+			
+			
+			var fileInput = document.getElementById("leftImage");
+			var file = fileInput.files[0];
+			var lastModified = file.lastModified;
+
+			var date = new Date(lastModified);
+			var month = date.getMonth() + 1;
+			if(month.toString().length == 1) {
+				month = "0" + month;
+			}  
+			var day = date.getDate();
+			if(day.toString().length == 1) {
+				day = "0" + day;
+			} 
+			var year = date.getFullYear();
+
+			document.getElementById("leftImageDate").value = year + "-" + month + "-" + day;
+			
+			
+			var fileInput = document.getElementById("rightImage");
+			var file = fileInput.files[0];
+			var lastModified = file.lastModified;
+
+			var date = new Date(lastModified);
+			var month = date.getMonth() + 1;
+			if(month.toString().length == 1) {
+				month = "0" + month;
+			}  
+			var day = date.getDate();
+			if(day.toString().length == 1) {
+				day = "0" + day;
+			} 
+			var year = date.getFullYear();
+
+			document.getElementById("rightImageDate").value = year + "-" + month + "-" + day;
+		}

@@ -1,0 +1,15 @@
+extends layout
+
+block content
+	.container
+		h1 Remove vehicle operator from your team
+		form(role='form', action="/removeOp",method="post", style='max-width: 300px;')
+			.form-group
+					label(for="sel1") Select user to remove:
+					select.form-control(id="sel1", name="username")
+						for curVehicleOp in curVehicleOps
+							option(value="#{curVehicleOp}") #{curVehicleOp}
+			button.btn.btn-default(type='submit') Submit
+			&nbsp;
+			a(href='/')
+				button.btn.btn-primary(type="button") Cancel

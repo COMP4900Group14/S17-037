@@ -2,21 +2,25 @@ extends layout
 
 block content
 	.container
-		h1 Register
+		h1 Create Account
 		if(error)
 			p.lead Sorry the username you requested already exists. Please choose a new one.
 		else 
 			p.lead
-		form(role='form', action="/register",method="post", style='max-width: 300px;')
+		form(role='form', action="/createAcct",method="post", style='max-width: 300px;')
+			.form-group
+					label(for="sel1") Select user role:
+					select.form-control(id="sel1", name="userRole")
+						option(value="vehicle") Vehicle Operator
+						option(value="admin") Administrator
+						option(value="hybrid") Administrator / Vehicle Operator Hybrid
+						option(value="superuser") Superuser
 			.form-group
 					input.form-control(type='text', name='username',
 									   pattern='[a-zA-Z0-9._%+-]+@posabilities\.ca$',
 									   placeholder='Example@posabilities.ca',
-									   title='Please enter your posAbilities email',
+									   title='Please enter your posAbilities email', 
 									   required='true')
-
-			.form-group
-				input.form-control(type='password', name="password", placeholder='Password', required='true')
 			button.btn.btn-default(type='submit') Submit
 			&nbsp;
 			a(href='/')

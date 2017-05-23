@@ -1,0 +1,349 @@
+extends layout
+
+block content
+	h3 Pre-trip Inspection Form
+	form#derpform.form-inline(action='', method='POST', enctype="multipart/form-data")
+		for pretrip in pretrips
+			.form-group
+			.col-lg-3.col-md-6.col-sm-6.col-xs-12
+				label(for='vehicleLicencePlate_') plate number:
+				br
+				p#program.form-control(name='vehicleLicencePlate_') #{pretrip.vehicleLicencePlate}
+			.col-lg-3.col-md-6.col-sm-6.col-xs-12
+				label(for='fleet_') Fleet:
+				br
+				p#fleet.form-control(name='fleet_') #{pretrip.fleet}
+			.col-lg-12.col-md-12.col-xs-12
+				hr#linebreaker
+			
+			.col-lg-12.col-md-12.col-xs-12
+				// LIGHTING
+				h3 LIGHTING
+				div
+					br
+					.row.bg-info
+						.col-lg-8.col-md-8.col-xs-8
+							label(for='backUpLights') BackUp Lights: 
+						.col-lg-2.col-md-2.col-xs-1
+							if(pretrip.backUpLighs)
+								p#backUpLights(name='backUpLighs_') &#10004;
+							else 
+								p#backUpLights(name='backUpLighs_') x
+					br
+					.row.bg-info
+						.col-lg-8.col-md-8.col-xs-8
+							label(for='brakeLights') Brake Lights: 
+						.col-lg-2.col-md-2.col-xs-1
+							if(pretrip.brakeLights)
+								p#backUpLights(name='brakeLights') &#10004;
+							else 
+								p#backUpLights(name='brakeLights') x
+					br
+					.row.bg-info
+						.col-lg-8.col-md-8.col-xs-8
+							label(for='emergencyFlashers') Emergency Flashers: 
+						.col-lg-2.col-md-2.col-xs-1
+							if(pretrip.emergencyFlashers)
+								p#backUpLights(name='emergencyFlashers') &#10004;
+							else 
+								p#backUpLights(name='emergencyFlashers') x
+					br
+					.row.bg-info
+						.col-lg-8.col-md-8.col-xs-8
+							label(for='headLights_high_low') Head Lights (high/low):
+						.col-lg-2.col-md-2.col-xs-1
+							if(pretrip.headLights_high_low)
+								p#backUpLights(name='headLights_high_low') &#10004;
+							else 
+								p#backUpLights(name='headLights_high_low') x
+					br
+					.row.bg-info
+						.col-lg-8.col-md-8.col-xs-8
+							label(for='interiorLights') Interior Lights:
+						.col-lg-2.col-md-2.col-xs-1
+							if(pretrip.interiorLights)
+								p#backUpLights(name='interiorLights') &#10004;
+							else 
+								p#backUpLights(name='interiorLights') x
+					br
+					.row.bg-info
+						.col-lg-8.col-md-8.col-xs-8
+							label(for='sideMarkers') Side Markers:
+						.col-lg-2.col-md-2.col-xs-1
+							if(pretrip.sideMarkers)
+								p#backUpLights(name='sideMarkers') &#10004;
+							else 
+								p#backUpLights(name='sideMarkers') x
+					br
+					.row.bg-info
+						.col-lg-8.col-md-8.col-xs-8
+							label(for='turnSignals') Turn Signals:
+						.col-lg-2.col-md-2.col-xs-1
+							if(pretrip.turnSignals)
+								p#backUpLights(name='turnSignals') &#10004;
+							else 
+								p#backUpLights(name='turnSignals') x
+					br
+					.row.bg-info
+						.col-lg-8.col-md-8.col-xs-8
+							label(for='licensePlate') License Plate:
+						.col-lg-2.col-md-2.col-xs-1
+							if(pretrip.licensePlate)
+								p#backUpLights(name='licensePlate') &#10004;
+							else 
+								p#backUpLights(name='licensePlate') x
+					br
+					// FLUIDS
+					h3 FLUIDS
+					.row.bg-info
+						.col-lg-8.col-md-8.col-xs-8
+							label(for='oil') Oil:
+						.col-lg-2.col-md-2.col-xs-1
+							if(pretrip.oil)
+								p#backUpLights(name='oil') &#10004;
+							else 
+								p#backUpLights(name='oil') x
+					br
+					// TIRES
+					h3 TIRES
+					.row.bg-info
+						.col-lg-8.col-md-8.col-xs-8
+							label(for='visualPressureCheck') Visual Pressure Check:
+						.col-lg-2.col-md-2.col-xs-1
+							if(pretrip.visualPressureCheck)
+								p#backUpLights(name='visualPressureCheck') &#10004;
+							else 
+								p#backUpLights(name='visualPressureCheck') x
+					br
+					// misc
+					h3 MISCELANIOUS
+					.row.bg-info
+						.col-lg-8.col-md-8.col-xs-8
+							label(for='preAndPostTripBodyInspection') Pre and Post Trip Body Inspection:
+						.col-lg-2.col-md-2.col-xs-1
+							if(pretrip.preAndPostTripBodyInspection)
+								p#backUpLights(name='preAndPostTripBodyInspection') &#10004;
+							else 
+								p#backUpLights(name='preAndPostTripBodyInspection') x
+					br
+					.row.bg-info
+						.col-lg-8.col-md-8.col-xs-8
+							label(for='windshieldVisibility') Windshield Visibility:
+						.col-lg-2.col-md-2.col-xs-1
+							if(pretrip.windshieldVisibility)
+								p#backUpLights(name='windshieldVisibility') &#10004;
+							else 
+								p#backUpLights(name='windshieldVisibility') x
+					br
+					.row.bg-info
+						.col-lg-8.col-md-8.col-xs-8
+							label(for='mirrors') Mirrors:
+						.col-lg-2.col-md-2.col-xs-1
+							if(pretrip.mirrors)
+								p#backUpLights(name='mirrors') &#10004;
+							else 
+								p#backUpLights(name='mirrors') x
+					br
+					.row.bg-info
+						.col-lg-8.col-md-8.col-xs-8
+							label(for='steering') Steering:
+						.col-lg-2.col-md-2.col-xs-1
+							if(pretrip.steering)
+								p#backUpLights(name='steering') &#10004;
+							else 
+								p#backUpLights(name='steering') x
+					br
+					.row.bg-info
+						.col-lg-8.col-md-8.col-xs-8
+							label(for='horn') Horn:
+						.col-lg-2.col-md-2.col-xs-1
+							if(pretrip.horn)
+								p#backUpLights(name='horn') &#10004;
+							else 
+								p#backUpLights(name='horn') x
+					br
+					.row.bg-info
+						.col-lg-8.col-md-8.col-xs-8
+							label(for='fuelLevel') Fuel Level:
+						.col-lg-2.col-md-2.col-xs-1
+							if(pretrip.fuelLevel)
+								p#backUpLights(name='fuelLevel') &#10004;
+							else 
+								p#backUpLights(name='fuelLevel') x
+					br
+					.row.bg-info
+						.col-lg-8.col-md-8.col-xs-8
+							label(for='wipers') Wipers:
+						.col-lg-2.col-md-2.col-xs-1
+							if(pretrip.wipers)
+								p#backUpLights(name='wipers') &#10004;
+							else 
+								p#backUpLights(name='wipers') x
+					br
+					.row.bg-info
+						.col-lg-8.col-md-8.col-xs-8
+							label(for='seatBelts_lifts_straps') Seatbelts:
+						.col-lg-2.col-md-2.col-xs-1
+							if(pretrip.seatBelts_lifts_straps)
+								p#backUpLights(name='seatBelts_lifts_straps') &#10004;
+							else 
+								p#backUpLights(name='seatBelts_lifts_straps') x
+					br
+					// WEEKLY CHECK
+					// fluids_circleLevels
+					h3 Fluids/Circle Levels
+					.row.bg-info
+						.col-lg-4.col-md-4.col-xs-4
+							label(for='oil') Oil
+						.col-lg-6.col-md-6.col-xs-6
+							p#oil(name='oil_levels_') #{pretrip.oil_levels}
+					br
+					.row.bg-info
+						.col-lg-4.col-md-4.col-xs-4
+							label(for='coolant') Coolant
+						.col-lg-6.col-md-6.col-xs-6
+							p#coolant(name='coolant_levels_)') #{pretrip.coolant_levels}
+					br
+					.row.bg-info
+						.col-lg-4.col-md-4.col-xs-4
+							label(for='transmissionFluids') Transmission Fluids
+						.col-lg-6.col-md-6.col-xs-6
+							p#transmissionFluids(name='transmissionFluids_levels_') #{pretrip.transmissionFluids_levels}
+					br
+					.row.bg-info
+						.col-lg-4.col-md-4.col-xs-4
+							label(for='powerSteering') Power Steering
+						.col-lg-6.col-md-6.col-xs-6
+							p#powerSteering(name='powerSteering_levels_') #{pretrip.powerSteering_levels}
+					br
+					.row.bg-info
+						.col-lg-4.col-md-4.col-xs-4
+							label(for='brakeFluid') Brake Fluid
+						.col-lg-6.col-md-6.col-xs-6
+							p#brakeFluid(name='brakeFluid_levels_') #{pretrip.brakeFluid_levels}
+					br
+					.row.bg-info
+						.col-lg-4.col-md-4.col-xs-4
+							label(for='wiperFluid') Wiper Fluid
+						.col-lg-6.col-md-6.col-xs-6
+							p#wiperFluid(name='wiperFluid_levels_') #{pretrip.wiperFluid_levels}
+					br
+					// record condition
+					h3 RECORD CONDITION
+					.row.bg-info
+						.col-lg-4.col-md-4.col-xs-4
+							label(for='belts') Belts
+						.col-lg-6.col-md-6.col-xs-6
+							p#belts.selectpicker(name='belts_') #{pretrip.belts}
+					br
+					h3 Visual Checks
+					.row.bg-info
+						.col-lg-4.col-md-4.col-xs-4
+							label(for='leaks') Leaks
+						.col-lg-6.col-md-6.col-xs-6
+							p#leaks.selectpicker(name='leaks_') #{pretrip.leaks}
+					br
+					.row.bg-info
+						.col-lg-4.col-md-4.col-xs-4
+							label(for='battery') Battery
+						.col-lg-6.col-md-6.col-xs-6
+							p#battery.selectpicker(name='battery_') #{pretrip.battery}
+					br
+					.row.bg-info
+						.col-lg-4.col-md-4.col-xs-4
+							label(for='wiring') Wiring
+						.col-lg-6.col-md-6.col-xs-6
+							p#wiring.selectpicker(name='wiring_') #{pretrip.wiring}
+					br
+					.row.bg-info
+						.col-lg-4.col-md-4.col-xs-4
+							label(for='hoses') Hoses
+						.col-lg-6.col-md-6.col-xs-6
+							p#hoses.selectpicker(name='hoses_') #{pretrip.hoses}
+					br
+					.row.bg-info
+						.col-lg-4.col-md-4.col-xs-4
+							label(for='clamps') Clamps
+						.col-lg-6.col-md-6.col-xs-6
+							p#clamps.selectpicker(name='clamps_') #{pretrip.clamps}
+					br
+					h3 TIRES
+					.row.bg-info
+						.col-lg-4.col-md-4.col-xs-4
+							label(for='measurePressure') Measure Pressure
+						.col-lg-6.col-md-6.col-xs-6
+							p#measurePressure.selectpicker(name='measurePressure_') #{pretrip.measurePressure}
+					br
+					.row.bg-info
+						.col-lg-4.col-md-4.col-xs-4
+							label(for='lugNuts') Lug Nuts
+						.col-lg-6.col-md-6.col-xs-6
+							p#lugNuts.selectpicker(name='lugNuts_') #{pretrip.lugNuts}
+					br
+					.row.bg-info
+						.col-lg-4.col-md-4.col-xs-4
+							label(for='treads') Treads
+						.col-lg-6.col-md-6.col-xs-6
+							p#treads.selectpicker(name='treads_') #{pretrip.treads}
+					br
+					.row.bg-info
+						.col-lg-4.col-md-4.col-xs-4
+							label(for='rims') Rims
+						.col-lg-6.col-md-6.col-xs-6
+							p#rims.selectpicker(name='rims_') #{pretrip.rims}
+					br
+					.row.bg-info
+						.col-lg-4.col-md-4.col-xs-4
+							label(for='spare') Spare
+						.col-lg-6.col-md-6.col-xs-6
+							p#spare.selectpicker(name='spare_') #{pretrip.spare}
+					br
+					h3 EMERGENCY EQUIPMENT
+					.row.bg-info
+						.col-lg-4.col-md-4.col-xs-4
+							label(for='flares') Flares
+						.col-lg-6.col-md-6.col-xs-6
+							p#flares.selectpicker(name='flares_') #{pretrip.flares}
+					br
+					.row.bg-info
+						.col-lg-4.col-md-4.col-xs-4
+							label(for='fireExtinguisher') Fire Extinguisher
+						.col-lg-6.col-md-6.col-xs-6
+							p#fireExtinguisher.selectpicker(name='fireExtinguisher_') #{pretrip.fireExtinguisher}
+					br
+					.row.bg-info
+						.col-lg-4.col-md-4.col-xs-4
+							label(for='jack_wheelWrench') Jack/Wheel Wrench
+						.col-lg-6.col-md-6.col-xs-6
+							p#jack_wheelWrench.selectpicker(name='jack_wheelWrench_') #{pretrip.jack_wheelWrench}
+					br
+					.row.bg-info
+						.col-lg-4.col-md-4.col-xs-4
+							label(for='seatBeltClutter') Seat Belt Clutter
+						.col-lg-6.col-md-6.col-xs-6
+							p#seatBeltClutter.selectpicker(name='seatBeltClutter_') #{pretrip.seatBeltClutter}
+					br
+					.row.bg-info
+						.col-lg-4.col-md-4.col-xs-4
+							label(for='boosterCables') Booster Cables
+						.col-lg-6.col-md-6.col-xs-6
+							p#boosterCables.selectpicker(name='boosterCables_') #{pretrip.boosterCables}
+					br
+					h3 MISCELLANIOUS
+					.row.bg-info
+						.col-lg-4.col-md-4.col-xs-4
+							label(for='vehicleDocument_insurance') Vehicle Document Insurance
+						.col-lg-6.col-md-6.col-xs-6
+							p#vehicleDocument_insurance.selectpicker(name='vehicleDocument_insurance_') #{pretrip.vehicleDocument_insurance}
+					br
+					// notes
+					br
+					br
+					label(for='notes_') NOTES:
+					br
+					p#notes_(name='notes_') #{pretrip.notes}
+					br
+					img(src="#{pretrip.frontImage}", class='img-responsive', alt='front')
+					img(src="#{pretrip.backImage}", class='img-responsive', alt='back')
+					img(src="#{pretrip.leftImage}", class='img-responsive', alt='left')
+					img(src="#{pretrip.rightImage}", class='img-responsive', alt='right')

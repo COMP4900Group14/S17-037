@@ -1,0 +1,46 @@
+extends layout
+
+block content
+	.container
+		h1 Change Password
+		if(error)
+			p.lead Sorry the password you input isn't correct
+		else 
+			p.lead
+		form(role='form', action="/changePass",method="post", style='max-width: 300px;')
+			.form-group
+				label(for="sel1") Original password:
+				input.form-control(type='password', name="password", placeholder='Password', required='true')
+			.form-group
+				label(for="sel1") New password:
+				input.form-control(type='password', id="newPassword", name="newPassword", placeholder='Password', required='true')
+			.form-group
+				label(for="sel1") Confirm new password:
+				input.form-control(type='password', id="confirmPassword", name="confirmPassword", placeholder='Confirm password', required='true')
+			button.btn.btn-default(type='submit', id="submitButton") Submit
+			&nbsp;
+			a(href='/')
+				button.btn.btn-primary(type="button") Cancel
+			script.
+				var match = false;
+			
+				var password = document.getElementById("newPassword");
+				var confirm_password = document.getElementById("confirmPassword");
+				
+				document.getElementById("submitButton").onclick = function (event) {
+
+					if(password.value != confirm_password.value) {
+						match = false;
+					} else {
+						match = true;
+					}
+					
+					if(!match) {
+						console.log("not match");
+						confirm_password.setCustomValidity("Passwords Don't Match");
+						//event.preventDefault();
+					} else {
+						confirm_password.setCustomValidity('');
+						console.log("match")
+					}
+				}
